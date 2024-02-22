@@ -1,0 +1,91 @@
+body {
+    width: auto;
+    height: auto;
+    background: url("./images/glizzycat-start.png");
+    background-size: 50%;
+    
+    
+  }
+  
+  #start-button {
+    justify-content: center;
+    align-items: center;
+    background-color: hsla(120, 61%, 6%, 0.534);
+    border: 1px solid hsl(130, 100%, 30%);
+    border-radius: 5px;
+    padding: 10px 100px;
+    color: orange;
+    position: fixed;
+    top: 41.5%;
+    left: 41.5%;
+    
+  }
+  
+  #text {
+    color: orange;
+    padding: 10px;
+  }
+  
+  #game {
+        background-color: hsla(120, 61%, 6%, 0.541);
+        border: 1px solid hsl(32, 93%, 47%);
+        border-radius: 5px;
+        padding: 10px 100px;
+        color: orange;
+        outline: none;
+        visibility: hidden;
+        
+  }
+  
+  #controls {
+    border: 1px rgb(253, 186, 3) solid;
+    padding: 5px;
+    text-align: center;
+    
+  }
+
+  #button1 {
+    background-color: hsla(120, 61%, 6%, 0.623);
+    border: 1px solid hsl(130, 100%, 30%);
+    border-radius: 5px;
+    padding: 5px 10px;
+    color: orange;
+    outline: none;
+  }
+
+  #button2 {
+    background-color: hsla(120, 61%, 6%, 0.623);
+    border: 1px solid hsl(130, 100%, 30%);
+    border-radius: 5px;
+    padding: 5px 10px;
+    color: orange;
+    outline: none;
+  }
+
+  #button3 {
+    background-color: hsla(120, 61%, 6%, 0.623);
+    border: 1px solid hsl(130, 100%, 30%);
+    border-radius: 5px;
+    padding: 5px 10px;
+    color: orange;
+    outline: none;
+  }
+  #stats {
+    border: 1px rgb(255, 166, 0) solid;
+    color: rgb(3, 230, 15);
+    padding: 5px;
+    text-align: center;
+  }
+  
+  #enemyStats {
+    display: none;
+    color: rgb(255, 0, 0);
+    padding: 5px;
+    background-color: hsla(120, 61%, 6%, 0.089);
+    border: 1px rgb(255, 166, 0) solid;
+    text-align: center;
+  }
+  
+  .stat {
+    padding-right: 10px;
+  }
