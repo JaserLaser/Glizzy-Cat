@@ -1,11 +1,11 @@
 let health = 100;
-let credits = 50
+let credits = 30
 let catnip = 0;
 let actualGlizzy = 0;
 let hunting
 let enemyHealth
 let inventory = [`Glizzy`]
-
+let power = 0
 
 const myAudio = new Audio()
 myAudio.src = './audio/2049.mp3'
@@ -71,9 +71,9 @@ const enemies = [
         health: 60
     },
     {
-        name: "Gator",
+        name: "CyborgGator",
         level: 20,
-        health: 300
+        health: 500
     }
 ]
 
@@ -83,7 +83,7 @@ const locations = [
         btnText: ["Visit sketchy merchant.", "Go hunting!", "Fight CyborgGator"],
         btnFunctions: [visitMerchant, goHunting, fightGator],
         text: "You are at the top of a building in downtown.",
-        image: './images/glizzycat-start.png'
+        image: './images/glizzycat-downT.png'
     },
     {
         name: "sketchy merchant",
@@ -97,35 +97,35 @@ const locations = [
         btnText: ["Fight rat", "Fight iguana", "Return to downtown"],
         btnFunctions: [fightRat, fightIguana, goDowntown],
         text: "You head down to the street, it's full of vermins.",
-        image: './images/glizzycat-start.png'
+        image: './images/glizzycat-hunt.png'
     },
     {
         name: "fight",
 		btnText: ["Attack", "Catnip Mode", "Run"],
 		btnFunctions: [attack, catnipPwr, goDowntown],
 		text: "You are hunting a vermin.",
-        image: './images/glizzycat-start.png'
+        image: './images/glizzycat-fight.png'
     },
     {
         name: "kill enemy",
 		btnText: ["Go downtown", "Keep hunting", "Visit sketchy merchant"],
 		btnFunctions: [goDowntown, goHunting, visitMerchant],
-		text: "The vermin dies. You play with it's severed tail for a while until some credits and catnip drops out of it. -WHAT? WHY? HOW?- That doesn't really matter just keep playing. A hunter must hunt!",
-        image: './images/glizzycat-start.png'
+		text: "The vermin crumples at your paws, a victory screech bubbling in your throat. You pounce on its twitching tail... then blink. Credits? Catnip? What bizarre bounty! It's a lucky day for Glizzy Cat. A hunter must hunt... and tonight's hunt was extra rewarding!",
+        image: './images/glizzycat-kill.png'
     },
     {
         name: "lose",
 		btnText: ["RELOAD?", "RELOAD?","RELOAD?"],
 		btnFunctions: [restart, restart, restart],
 		text: "You die. But don't worry you probably have a few lives left...probaly...",
-        image: './images/glizzycat-start.png'
+        image: './images/glizzycat-lose.png'
     },
     {
         name: "win",
 		btnText: ["REPLAY?", "REPLAY?", "REPLAY?"],
 		btnFunctions: [restart, restart, restart],
-		text: "You defeat the CyborGator! Peace has ben restored, now you can enjoy some catnip-infused milk.",
-        image: './images/glizzycat-start.png'
+		text: "The CyborgGator screeches, circuits sparking as you deliver the final blow. Victory! Now, the city's streets hum with a new kind of peace. You stretch triumphantly, already imagining the sweet tang of catnip-infused milk. A hero's reward, well-deserved by Glizzy Cat!",
+        image: './images/glizzycat-win.png'
     }
 
 
@@ -163,7 +163,7 @@ function visitMerchant(){
     update(locations[1])
 }
 function buyMilk() {
-    if (health < 100) {
+    if (health < 120) {
         if (credits >= 5) {
             credits -= 5
             health += 5
@@ -192,9 +192,10 @@ function upgradeGlizzy() {
         }
     } else {
         text.innerText = "Your Glizzy is already maxed out!"
-        button2.innerText
+       
     }
 }
+
 
 function goHunting() {
     update(locations[2])
@@ -226,8 +227,8 @@ function goFight() {
 
 function attack(){
     health -= enemies[hunting].level;
-    damageDone = upgrades[actualGlizzy].atk + Math.floor(Math.random() * catnip) + 1
-    enemyHealth -= upgrades[actualGlizzy].atk + Math.floor(Math.random() * catnip) + 1;
+    damageDone = upgrades[actualGlizzy].atk
+    enemyHealth -= upgrades[actualGlizzy].atk
     healthNum.innerText = health;
     enemyHealthNum.innerText = enemyHealth;
     text.innerText = `The ${enemies[hunting].name} attacks. You take ${enemies[hunting].level} damage`;
@@ -245,7 +246,33 @@ function attack(){
 }
 
 function catnipPwr() {
-    text.innerText = "You channel the power of the Catnip!";
+    let acurracy = (Math.random());
+    if ( acurracy > .4) {
+    health -= enemies[hunting].level;
+    damageDone = upgrades[actualGlizzy].atk + Math.floor(Math.random() * catnip) + 2
+    enemyHealth -= upgrades[actualGlizzy].atk + Math.floor(Math.random() * catnip) + 2;
+    healthNum.innerText = health;
+    enemyHealthNum.innerText = enemyHealth;
+    text.innerText = "You channel the power of Catnip! The Catnip buzzes through you, a surge of unstoppable energy. ";
+    text.innerText += ` You shoot at the vermin with your ${upgrades[actualGlizzy].name}. Doing ${damageDone} damage.`;
+    text.innerText += ` The ${enemies[hunting].name} attacks. You take ${enemies[hunting].level} damage. `;
+    if (health <= 0){
+        lose();
+    } else if (enemyHealth <= 0){
+        if (hunting === 2) {
+            winGame();
+        } else {
+            defeatEnemy()
+        }
+    }
+} else {
+    health -= enemies[hunting].level;
+    healthNum.innerText = health;
+    text.innerText = "You channel the power of Catnip! The Catnip buzzes through you, a surge of unstoppable energy. Yet, somehow, your target remains unharmed! You missed! A temporary setback, a mere miscalculation. "
+    text.innerText += ` The ${enemies[hunting].name} attacks. You take ${enemies[hunting].level} damage. `;
+} if (health <= 0){
+    lose();
+}
 }
 
 function defeatEnemy(){

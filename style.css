@@ -1,7 +1,7 @@
 body {
     width: auto;
     height: auto;
-    background: url("./images/glizzycat-start.png");
+    background: url("./images/glizzycat-2049.png");
     background-size: 50%;
     
     
@@ -18,7 +18,8 @@ body {
     position: fixed;
     top: 41.5%;
     left: 41.5%;
-    
+    right: 41.5%;
+    text-align: center;
   }
   
   #text {
@@ -34,7 +35,11 @@ body {
         color: orange;
         outline: none;
         visibility: hidden;
-        
+        max-width: 600px;
+        text-align: center;
+        position:fixed;
+        left: 30%;
+        right: 30%;
   }
   
   #controls {
